@@ -1,11 +1,69 @@
 // DO WHATEVER YOU WANT HERE
 
-const createEnumerableProperty = () => {};
-const createNotEnumerableProperty = () => {};
-const createProtoMagicObject = () => {};
-const incrementor = () => {};
-const asyncIncrementor = () => {};
-const createIncrementer = () => {};
+const createEnumerableProperty = ( propertyName ) => { return propertyName };
+
+const createNotEnumerableProperty = ( propertyName ) => {     
+	Object.defineProperty(Object.prototype, propertyName, {
+    enumerable: false,
+    get: function () { 
+      return propertyName;
+    },
+    set: function (value) { 
+      propertyName = value;
+    }
+  });
+  return propertyName; };
+
+
+const createProtoMagicObject = () => {
+	func = function(){};
+  func.prototype = func.__proto__;
+  return func;
+};
+
+
+const incrementor = () => {  
+
+	++incrementor.currentCount;
+
+  function incrementCounter(){
+    ++incrementor.currentCount;
+    return incrementCounter;
+  }
+
+  incrementCounter.valueOf = function() {
+    return incrementor.currentCount;
+  }
+
+  return incrementCounter;
+};
+
+incrementor.currentCount = 0;
+
+const asyncIncrementor = () => {
+	return ++asyncIncrementor.currentCount;
+};
+asyncIncrementor.currentCount = 0;
+
+const createIncrementer = () => {
+	let current = 0;
+
+  return {
+
+    next() {
+
+      return {
+        done: false,
+        value: ++current
+      };
+    },
+
+    [Symbol.iterator](){
+      return this;
+    }
+
+  }
+};
 
 // return same argument not earlier than in one second, and not later, than in two
 const returnBackInSecond = () => {};
