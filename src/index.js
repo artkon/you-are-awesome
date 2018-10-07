@@ -88,14 +88,14 @@ const returnBackInSecond = (param) => {
 
 // 7
 const getDeepPropertiesCount = (object) => {
-	var count = 0;
+	let count = 0;
   
-  var tempObj = object;  
+  let tempObj = object;  
   iterObj(tempObj);
 
   function iterObj(obj){
 
-    var objKeys = Object.keys(obj);
+    let objKeys = Object.keys(obj);
     var objLength = Object.keys(obj).length;
 
     count += objLength;
